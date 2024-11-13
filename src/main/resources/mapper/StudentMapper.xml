@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.train.springboot_demo.mapper.StudentMapper">
+    <resultMap id="StudentMap" type="com.hand.train.springboot_demo.po.Student">
+        <id column="s_id" property="sId"/>
+        <result column="s_name" property="sName"/>
+        <result column="s_brith" property="sBrith"/>
+        <result column="s_sex" property="sSex"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="StudentMap">
+        SELECT * FROM student
+    </select>
+
+    <select id="findById" resultMap="StudentMap" parameterType="java.lang.Long">
+        SELECT * FROM student WHERE s_id = #{id}
+    </select>
+
+    <insert id="create" parameterType="com.hand.train.springboot_demo.po.Student">
+        INSERT INTO student(s_id, s_name, s_brith, s_sex)
+        VALUES (#{sId}, #{sName}, #{sBrith}, #{sSex})
+    </insert>
+
+    <update id="update" parameterType="com.hand.train.springboot_demo.po.Student">
+        UPDATE student
+        SET s_name = #{sName},
+        s_brith = #{sBrith},
+        s_sex = #{sSex}
+        WHERE s_id = #{sId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM student WHERE s_id = #{id}
+    </delete>
+</mapper>
